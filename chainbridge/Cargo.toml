@@ -1,25 +1,29 @@
 [package]
-name = 'chainbridge'
-version = '0.0.2'
-authors = ['david@chainsafe.io']
-edition = '2018'
+name = 'sugarfunge-bridge'
+version = "0.1.0"
+authors = ["david@chainsafe.io", "SugarFunge Developers"]
+edition = '2021'
 
 [dependencies]
 # third-party dependencies
 codec = { package = "parity-scale-codec", version = "2.0.0", default-features = false, features = ["derive"] }
-serde = { version = "1.0.101", optional = true }
+scale-info = { version = "1.0", default-features = false, features = ["derive"] }
+serde = { version = "1.0.136", optional = true }
 
 # primitives
-sp-std = { version = "3.0.0", default-features = false }
-sp-runtime = { version = "3.0.0", default-features = false }
-sp-io = { version = "3.0.0", default-features = false }
-sp-core = { version = "3.0.0", default-features = false }
+sp-std = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.17", default-features = false }
+sp-runtime = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.17", default-features = false }
+sp-io = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.17", default-features = false }
+sp-core = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.17", default-features = false }
 
 # frame dependencies
-frame-support = { version = "3.0.0", default-features = false }
-frame-system = { version = "3.0.0", default-features = false }
+frame-support = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.17", default-features = false }
+frame-system = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.17", default-features = false }
 
-pallet-balances = { version = "3.0.0", default-features = false }
+sugarfunge-primitives = { package = "sugarfunge-primitives", path = "../../primitives", default-features = false }
+sugarfunge-asset = { package = "sugarfunge-asset", path = "../asset", default-features = false }
+
+pallet-balances = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.17", default-features = false }
 
 [build-dependencies]
 wasm-builder-runner = { version = "2.0.0", package = "substrate-wasm-builder-runner"}
@@ -27,6 +31,7 @@ wasm-builder-runner = { version = "2.0.0", package = "substrate-wasm-builder-run
 default = ["std"]
 std = [
 	"codec/std",
+	"scale-info/std",
 	"serde",
 	"sp-std/std",
 	"sp-runtime/std",
@@ -35,6 +40,8 @@ std = [
 	"frame-support/std",
 	"frame-system/std",
 	"pallet-balances/std",
+	"sugarfunge-primitives/std",
+	"sugarfunge-asset/std",
 ]
 runtime-benchmarks = [
 	"frame-system/runtime-benchmarks",
